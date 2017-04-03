@@ -11,9 +11,17 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'api' => [
+            'class' => 'frontend\modules\api\Api',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -36,14 +44,16 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/province'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/city'],
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
