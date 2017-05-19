@@ -49,8 +49,21 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/province'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/city'],
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => [
+                        'api/province', 
+                        'api/city'
+                    ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/user',
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                        'GET logout' => 'logout',
+                    ]
+                ],
             ],
         ],
         
