@@ -49,20 +49,49 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => [
-                        'api/province', 
-                        'api/city'
-                    ]
-                ],
-                [
+                [ //Route untuk user
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'api/user',
                     'extraPatterns' => [
                         'POST login' => 'login',
                         'GET logout' => 'logout',
+                        'POST register' => 'register',
                     ]
+                ],
+                [ //Route untuk customer
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/customer',
+                    'extraPatterns' => [
+                        'POST register' => 'register',
+                    ],
+                ],
+                [ //Route untuk worker
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/worker',
+                    'extraPatterns' => [
+                        'POST register' => 'register',
+                    ],
+                ],
+                [ //Route untuk project
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/project',
+                    'extraPatterns' => [
+                        'POST create' => 'çreate',
+                    ],
+                ],
+                [ //Route untuk province
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/province',
+                    'extraPatterns' => [
+                        'GET get-all' => 'getAll',
+                    ],
+                ],
+                [ //Route untuk city
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/city',
+                    'extraPatterns' => [
+                        'GET get-all' => 'getAll',
+                    ],
                 ],
             ],
         ],

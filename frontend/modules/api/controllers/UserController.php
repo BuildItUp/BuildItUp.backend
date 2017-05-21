@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use Yii;
 use common\models\User;
+use frontend\models\SignupForm;
 use yii\filters\auth\QueryParamAuth;
 
 class UserController extends \yii\rest\ActiveController
@@ -17,7 +18,7 @@ class UserController extends \yii\rest\ActiveController
 	        'class' => QueryParamAuth::className(),
 	        'except' => [
 	        	'login',
-	        	'create'
+	        	'register'
 	        ]
 	    ];
 	    return $behaviors;
@@ -60,5 +61,16 @@ class UserController extends \yii\rest\ActiveController
 		$user->save();
 
 		return ['status' => 'logout success'];
+	}
+
+	public function actionRegister()
+	{
+		$user = new SignupForm();
+        if ($user->attributes = Yii::$app->request->post()) {
+            if ($user = $user->signup()) {
+                return ['status' => 'success', 'message' => 'Register succeed', 'data' => $user];
+            }
+        }
+        return ['status' => 'failure', 'message' => 'Register failed'];
 	}
 }

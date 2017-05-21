@@ -3,6 +3,7 @@
 namespace frontend\modules\api\controllers;
 
 use yii\filters\auth\QueryParamAuth;
+use common\models\Provinces;
 
 class ProvinceController extends \yii\rest\ActiveController
 {
@@ -13,23 +14,12 @@ class ProvinceController extends \yii\rest\ActiveController
 	    $behaviors = parent::behaviors();
 	    $behaviors['authenticator'] = [
 	        'class' => QueryParamAuth::className(),
+             'except' => ['get-all'],
 	    ];
-	    // $behaviors['access'] = [
-     //            'class' => AccessControl::className(),
-     //            'only' => ['login', 'logout', 'signup'],
-     //            'rules' => [
-     //                [
-     //                    'allow' => true,
-     //                    'actions' => ['login', 'signup'],
-     //                    'roles' => ['?'],
-     //                ],
-     //                [
-     //                    'allow' => true,
-     //                    'actions' => ['logout'],
-     //                    'roles' => ['@'],
-     //                ],
-     //            ],
-     //        ],
 	    return $behaviors;
 	}
+
+     public function actionGetAll() {
+          return Provinces::find()->all();
+     }
 }
