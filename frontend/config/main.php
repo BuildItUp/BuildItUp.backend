@@ -63,6 +63,7 @@ return [
                     'controller' => 'api/customer',
                     'extraPatterns' => [
                         'POST register' => 'register',
+                        'GET get-user/<id:\d+>' => 'getUser'
                     ],
                 ],
                 [ //Route untuk worker

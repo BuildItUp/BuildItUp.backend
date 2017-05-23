@@ -4,6 +4,7 @@ namespace frontend\modules\api\controllers;
 
 use Yii;
 use common\models\Customer;
+use common\models\User;
 use yii\filters\auth\QueryParamAuth;
 
 class CustomerController extends \yii\rest\ActiveController
@@ -15,7 +16,10 @@ class CustomerController extends \yii\rest\ActiveController
 	    $behaviors = parent::behaviors();
 	    $behaviors['authenticator'] = [
 	        'class' => QueryParamAuth::className(),
-	        'except' => ['register'],
+	        'except' => [
+	        	'register',
+	        	'get-user',
+	        ],
 	    ];
 	    return $behaviors;
 	}
@@ -29,5 +33,16 @@ class CustomerController extends \yii\rest\ActiveController
 			}
 		}
 		return ['status' => 'failure', 'message' => 'Register failed'];
+	}
+
+	//API for get relations
+
+	public function actionGetUser($id) {
+		$customer = new Customer();
+		if ($customer = Customer::findOne($id)) {
+			return ['status' => 'success', 'message' => 'User found', 'data' => $customer->user];
+		} else {
+			return ['status' => 'failure', 'message' => 'User not found'];
+		}
 	}
 }
