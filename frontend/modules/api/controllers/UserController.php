@@ -66,10 +66,14 @@ class UserController extends \yii\rest\ActiveController
 	public function actionRegister()
 	{
 		$user = new SignupForm();
-        if ($user->attributes = Yii::$app->request->post()) {
-            if ($user = $user->signup()) {
-                return ['status' => 'success', 'message' => 'Register succeed', 'data' => $user];
-            }
+        if (User::find()->where(['username' => Yii::$app->request->post('username')])->one()) {
+        	return ['status' => 'failure', 'message' => 'Username already exist'];
+        } else {
+        	if ($user->attributes = Yii::$app->request->post()) {
+	            if ($user = $user->signup()) {
+	                return ['status' => 'success', 'message' => 'Register succeed', 'data' => $user];
+	            }
+	        }
         }
         return ['status' => 'failure', 'message' => 'Register failed'];
 	}
