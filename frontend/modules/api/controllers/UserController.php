@@ -39,17 +39,14 @@ class UserController extends \yii\rest\ActiveController
 					return ['status' => 'success', 'message' => 'Login succeed', 'data' => array_merge($user->toArray(), ['access_token' => $access_token])];
 				}
 				else {
-					Yii::$app->response->statusCode = 401;
-					return ['status' => 'failure', 'message' => 'Wrong password'];
+					return ['status' => 'failure', 'message' => 'Username/Password is wrong'];
 				} 
 			}
 			else {
-				Yii::$app->response->statusCode = 401;
-				return ['status' => 'failure', 'message' => 'Wrong username'];
+				return ['status' => 'failure', 'message' => 'Username/Password is wrong'];
 			} 
 		}
 		else {
-			Yii::$app->response->statusCode = 401;
 			return ['status' => 'failure', 'message' => 'Username & Password cannot be blank'];
 		} 
 	}
