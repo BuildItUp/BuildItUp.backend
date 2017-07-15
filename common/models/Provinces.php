@@ -3,51 +3,24 @@
 namespace common\models;
 
 use Yii;
+use \common\models\base\Provinces as BaseProvinces;
 
 /**
  * This is the model class for table "provinces".
- *
- * @property integer $id
- * @property string $name
- *
- * @property Cities[] $cities
  */
-class Provinces extends \yii\db\ActiveRecord
+class Provinces extends BaseProvinces
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'provinces';
-    }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [
+        return array_replace_recursive(parent::rules(),
+	    [
             [['name'], 'string', 'max' => 255],
-        ];
+            [['lock'], 'default', 'value' => '0'],
+            [['lock'], 'mootensai\components\OptimisticLockValidator']
+        ]);
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
-        ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCities()
-    {
-        return $this->hasMany(Cities::className(), ['provinces_id' => 'id']);
-    }
+	
 }
