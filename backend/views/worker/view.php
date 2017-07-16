@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 /* @var $model common\models\Worker */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Worker', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Workers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="worker-view">
