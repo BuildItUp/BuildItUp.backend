@@ -2,15 +2,21 @@ html,
 body {
     height: 100%;
     width: 100%;
+    background: rgba(0, 0, 0, 0.4);
     background:#000 url(../images/bg1.png) no-repeat fixed top center;
 }
 
 .transparent{
     background: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    width: 100%;
 }
 
 .transparent2{
     background: rgba(254, 255, 1, 0.4);
+    padding: 5%;
+    border-radius: 10px;
+
 }
 
 .icon-slide{

@@ -143,9 +143,9 @@ class Worker extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser($id)
+    public function getUser()
     {
-        return $this->hasOne(\common\models\User::className(), [$id => 'user_id']);
+        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
     }
         
     /**
