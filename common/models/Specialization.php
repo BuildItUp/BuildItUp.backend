@@ -17,9 +17,7 @@ class Specialization extends BaseSpecialization
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['name'], 'string', 'max' => 255],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['name'], 'string', 'max' => 255]
         ]);
     }
 	

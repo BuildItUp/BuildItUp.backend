@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Specialization */
 
 $this->title = 'Create Specialization';
-$this->params['breadcrumbs'][] = ['label' => 'Specialization', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Specializations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="specialization-create">

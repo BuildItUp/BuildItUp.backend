@@ -77,28 +77,51 @@ AppAsset::register($this);
                 <li>
                     <?= Html::a('Home',['site/index'])?>
                 </li>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                 <li>
                     <?= Html::a('Worker',['worker/index'])?>
                 </li>
+                <?php } ?>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                 <li>
                     <?= Html::a('Projects',['project/index'])?>
                 </li>
+                <?php } ?>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                 <li>
                     <?= Html::a('Notifications',['notification/index'])?>
                 </li>
+                <?php }?>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                  <li>
                     <?= Html::a('User',['user/index'])?>
                 </li>
+                <?php } ?>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                   <li>
                     <?= Html::a('Progress',['progress/index'])?>
                 </li>
-                   <li>
-                    <?= Html::a('Worker Specialization',['specialization/index'])?>
-                </li>
+                <?php } ?>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){
+                            if(Yii::$app->user->identity->username == "samsoec"){
+                ?>
+                            <li>
+                                <?= Html::a('Worker Specialization',['specialization/index'])?>
+                            </li>
+                 <?php }}
+                 ?>
+                 <?php 
+                        if(isset(Yii::$app->user->identity)){?>
                    <li>
                     <?= Html::a('Project Log',['log/index'])?>
                 </li>
-              
+              <?php } ?>
                    <?php if(Yii::$app->user->isGuest) {
                             ?><li>    <?= Html::a('Login',['site/login'])?> </li>
                        <?php }
