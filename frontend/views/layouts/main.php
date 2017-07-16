@@ -77,12 +77,7 @@ AppAsset::register($this);
                 <li>
                     <?= Html::a('Home',['site/index'])?>
                 </li>
-                <?php 
-                        if(isset(Yii::$app->user->identity)){?>
-                <li>
-                    <?= Html::a('Worker',['worker/index'])?>
-                </li>
-                <?php } ?>
+              
                 <?php 
                         if(isset(Yii::$app->user->identity)){?>
                 <li>
@@ -107,20 +102,18 @@ AppAsset::register($this);
                     <?= Html::a('Progress',['progress/index'])?>
                 </li>
                 <?php } ?>
-                <?php 
-                        if(isset(Yii::$app->user->identity)){
-                            if(Yii::$app->user->identity->username == "samsoec"){
-                ?>
-                            <li>
-                                <?= Html::a('Worker Specialization',['specialization/index'])?>
-                            </li>
-                 <?php }}
-                 ?>
+                
                  <?php 
                         if(isset(Yii::$app->user->identity)){?>
                    <li>
                     <?= Html::a('Project Log',['log/index'])?>
                 </li>
+                <?php 
+                        if(isset(Yii::$app->user->identity)){?>
+                  <li>
+                    <?= Html::a('Account',['worker/view?id='.Yii::$app->user->identity->id])?>
+                </li>
+                <?php } ?>
               <?php } ?>
                    <?php if(Yii::$app->user->isGuest) {
                             ?><li>    <?= Html::a('Login',['site/login'])?> </li>

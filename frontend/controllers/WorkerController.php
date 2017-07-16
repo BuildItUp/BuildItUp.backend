@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\User;
-use common\models\UserSearch;
+use common\models\Worker;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * WorkerController implements the CRUD actions for Worker model.
  */
-class UserController extends Controller
+class WorkerController extends Controller
 {
     public function behaviors()
     {
@@ -28,7 +28,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-customer', 'add-log', 'add-notification', 'add-worker'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-budget-log', 'add-cash-flow', 'add-colleagues', 'add-covered-loc', 'add-worker-contacts'],
                         'roles' => ['@']
                     ],
                     [
@@ -40,57 +40,71 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Worker models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        $dataProvider = new ActiveDataProvider([
+            'query' => Worker::find(),
         ]);
+        if(Worker::find('user_id',$id)){
+            return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);    
+        }
+        // return $this->render('index', [
+        //     'dataProvider' => $dataProvider,
+        // ]);
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Worker model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-        $providerCustomer = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->customers,
+        $model = $this->findModel(['user_id'=>$id]);
+        if(isset($model)){
+        $providerBudgetLog = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->budgetLogs,
         ]);
-        $providerLog = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->logs,
+        $providerCashFlow = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->cashFlows,
         ]);
-        $providerNotification = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->notifications,
+        $providerColleagues = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->colleagues,
         ]);
-        $providerWorker = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->workers,
+        $providerCoveredLoc = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->coveredLocs,
+        ]);
+        $providerWorkerContacts = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->workerContacts,
         ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'providerCustomer' => $providerCustomer,
-            'providerLog' => $providerLog,
-            'providerNotification' => $providerNotification,
-            'providerWorker' => $providerWorker,
+            'model' => $this->findModel(['user_id'=>$id]),
+            'providerBudgetLog' => $providerBudgetLog,
+            'providerCashFlow' => $providerCashFlow,
+            'providerColleagues' => $providerColleagues,
+            'providerCoveredLoc' => $providerCoveredLoc,
+            'providerWorkerContacts' => $providerWorkerContacts,
         ]);
+    }
+    else
+    {
+        return $this->render('site/error-worker');
+    }
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Worker model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Worker();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -102,7 +116,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Worker model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -121,7 +135,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Worker model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -135,15 +149,15 @@ class UserController extends Controller
 
     
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Worker model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Worker the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Worker::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -152,19 +166,19 @@ class UserController extends Controller
     
     /**
     * Action to load a tabular form grid
-    * for Customer
+    * for BudgetLog
     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
     *
     * @return mixed
     */
-    public function actionAddCustomer()
+    public function actionAddBudgetLog()
     {
         if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Customer');
+            $row = Yii::$app->request->post('BudgetLog');
             if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
-            return $this->renderAjax('_formCustomer', ['row' => $row]);
+            return $this->renderAjax('_formBudgetLog', ['row' => $row]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -172,19 +186,19 @@ class UserController extends Controller
     
     /**
     * Action to load a tabular form grid
-    * for Log
+    * for CashFlow
     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
     *
     * @return mixed
     */
-    public function actionAddLog()
+    public function actionAddCashFlow()
     {
         if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Log');
+            $row = Yii::$app->request->post('CashFlow');
             if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
-            return $this->renderAjax('_formLog', ['row' => $row]);
+            return $this->renderAjax('_formCashFlow', ['row' => $row]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -192,19 +206,19 @@ class UserController extends Controller
     
     /**
     * Action to load a tabular form grid
-    * for Notification
+    * for Colleagues
     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
     *
     * @return mixed
     */
-    public function actionAddNotification()
+    public function actionAddColleagues()
     {
         if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Notification');
+            $row = Yii::$app->request->post('Colleagues');
             if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
-            return $this->renderAjax('_formNotification', ['row' => $row]);
+            return $this->renderAjax('_formColleagues', ['row' => $row]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -212,19 +226,39 @@ class UserController extends Controller
     
     /**
     * Action to load a tabular form grid
-    * for Worker
+    * for CoveredLoc
     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
     *
     * @return mixed
     */
-    public function actionAddWorker()
+    public function actionAddCoveredLoc()
     {
         if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Worker');
+            $row = Yii::$app->request->post('CoveredLoc');
             if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
-            return $this->renderAjax('_formWorker', ['row' => $row]);
+            return $this->renderAjax('_formCoveredLoc', ['row' => $row]);
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    /**
+    * Action to load a tabular form grid
+    * for WorkerContacts
+    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+    *
+    * @return mixed
+    */
+    public function actionAddWorkerContacts()
+    {
+        if (Yii::$app->request->isAjax) {
+            $row = Yii::$app->request->post('WorkerContacts');
+            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+                $row[] = [];
+            return $this->renderAjax('_formWorkerContacts', ['row' => $row]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }

@@ -44,22 +44,22 @@ $this->registerJs($search);
             'expandOneOnly' => true
         ],
         ['attribute' => 'id', 'visible' => false],
-        [
-                'attribute' => 'project_id',
-                'label' => 'Project',
-                'value' => function($model){
-                    if ($model->project)
-                    {return $model->project->name;}
-                    else
-                    {return NULL;}
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\common\models\Project::find()->asArray()->all(), 'id', 'name'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'Project', 'id' => 'grid-worker-search-project_id']
-            ],
+        // [
+            //     'attribute' => 'project_id',
+            //     'label' => 'Project',
+            //     'value' => function($model){
+            //         if ($model->project)
+            //         {return $model->project->name;}
+            //         else
+            //         {return NULL;}
+            //     },
+            //     'filterType' => GridView::FILTER_SELECT2,
+            //     'filter' => \yii\helpers\ArrayHelper::map(\common\models\Project::find()->asArray()->all(), 'id', 'name'),
+            //     'filterWidgetOptions' => [
+            //         'pluginOptions' => ['allowClear' => true],
+            //     ],
+            //     'filterInputOptions' => ['placeholder' => 'Project', 'id' => 'grid-worker-search-project_id']
+            // ],
         [
                 'attribute' => 'user_id',
                 'label' => 'User',
@@ -108,15 +108,15 @@ $this->registerJs($search);
         'fullname',
         'citizen_id',
         'birthdate',
-        'photo_path',
-        'address',
-        'phone_number',
-        'email:email',
-        'graduate',
-        'graduate_date',
-        'avg_rating',
-        'personal_budget',
-        'project_budget',
+        // 'photo_path',
+        // 'address',
+        // 'phone_number',
+        // 'email:email',
+        // 'graduate',
+        // 'graduate_date',
+        // 'avg_rating',
+        // 'personal_budget',
+        // 'project_budget',
         'status',
         [
             'class' => 'yii\grid\ActionColumn',

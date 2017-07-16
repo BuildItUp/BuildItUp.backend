@@ -56,9 +56,7 @@ class Worker extends \yii\db\ActiveRecord
             [['fullname', 'photo_path', 'address', 'email', 'graduate'], 'string', 'max' => 255],
             [['citizen_id'], 'string', 'max' => 50],
             [['phone_number'], 'string', 'max' => 20],
-            [['email'], 'unique'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['email'], 'unique']
         ];
     }
     
@@ -68,17 +66,6 @@ class Worker extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'worker';
-    }
-
-    /**
-     * 
-     * @return string
-     * overwrite function optimisticLock
-     * return string name of field are used to stored optimistic lock 
-     * 
-     */
-    public function optimisticLock() {
-        return 'lock';
     }
 
     /**
@@ -187,17 +174,16 @@ class Worker extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
+            // 'timestamp' => [
+            //     'class' => TimestampBehavior::className(),
+            //     'createdAtAttribute' => 'created_at',
+            //     'updatedAtAttribute' => 'updated_at',
+            // ],
+            // 'blameable' => [
+            //     'class' => BlameableBehavior::className(),
+            //     'createdByAttribute' => 'created_by',
+            //     'updatedByAttribute' => 'updated_by',
+            // ],
             'uuid' => [
                 'class' => UUIDBehavior::className(),
                 'column' => 'id',

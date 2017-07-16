@@ -36,7 +36,7 @@ $this->registerJs($search);
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Project::find()->asArray()->all(), 'id', 'name'),
+                'filter' => \yii\helpers\ArrayHelper::map(\common\models\Project::find()->asArray()->all(), 'id', 'name'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],

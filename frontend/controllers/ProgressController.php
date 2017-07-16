@@ -1,9 +1,9 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use app\models\progress;
+use common\models\progress;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

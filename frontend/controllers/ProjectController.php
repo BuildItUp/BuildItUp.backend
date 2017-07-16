@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\User;
-use common\models\UserSearch;
+use common\models\Project;
+use common\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * ProjectController implements the CRUD actions for Project model.
  */
-class UserController extends Controller
+class ProjectController extends Controller
 {
     public function behaviors()
     {
@@ -28,7 +28,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-customer', 'add-log', 'add-notification', 'add-worker'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-progress', 'add-worker'],
                         'roles' => ['@']
                     ],
                     [
@@ -40,12 +40,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Project models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -55,42 +55,34 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Project model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $providerCustomer = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->customers,
-        ]);
-        $providerLog = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->logs,
-        ]);
-        $providerNotification = new \yii\data\ArrayDataProvider([
-            'allModels' => $model->notifications,
+        $providerProgress = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->progresses,
         ]);
         $providerWorker = new \yii\data\ArrayDataProvider([
             'allModels' => $model->workers,
         ]);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'providerCustomer' => $providerCustomer,
-            'providerLog' => $providerLog,
-            'providerNotification' => $providerNotification,
+            'providerProgress' => $providerProgress,
             'providerWorker' => $providerWorker,
         ]);
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Project model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Project();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -102,7 +94,7 @@ class UserController extends Controller
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Project model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -121,7 +113,7 @@ class UserController extends Controller
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Project model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -135,15 +127,15 @@ class UserController extends Controller
 
     
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Project model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Project the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Project::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -152,59 +144,19 @@ class UserController extends Controller
     
     /**
     * Action to load a tabular form grid
-    * for Customer
+    * for Progress
     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
     *
     * @return mixed
     */
-    public function actionAddCustomer()
+    public function actionAddProgress()
     {
         if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Customer');
+            $row = Yii::$app->request->post('Progress');
             if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
-            return $this->renderAjax('_formCustomer', ['row' => $row]);
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-    
-    /**
-    * Action to load a tabular form grid
-    * for Log
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
-    public function actionAddLog()
-    {
-        if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Log');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
-                $row[] = [];
-            return $this->renderAjax('_formLog', ['row' => $row]);
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-    
-    /**
-    * Action to load a tabular form grid
-    * for Notification
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
-    public function actionAddNotification()
-    {
-        if (Yii::$app->request->isAjax) {
-            $row = Yii::$app->request->post('Notification');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
-                $row[] = [];
-            return $this->renderAjax('_formNotification', ['row' => $row]);
+            return $this->renderAjax('_formProgress', ['row' => $row]);
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }

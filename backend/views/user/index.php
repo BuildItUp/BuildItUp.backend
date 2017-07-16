@@ -22,7 +22,7 @@ $this->registerJs($search);
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+    <!--     <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?> -->
         <?= Html::a('Advance Search', '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
@@ -33,13 +33,13 @@ $this->registerJs($search);
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'username',
-        'auth_key',
-        'password_hash',
-        'password_reset_token',
-        'access_token',
+        // 'auth_key',
+        // 'password_hash',
+        // 'password_reset_token',
+        // 'access_token',
         'email:email',
-        'pin',
-        'login_as',
+        // 'pin',
+        // 'login_as',
         'status',
         [
             'class' => 'yii\grid\ActionColumn',
