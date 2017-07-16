@@ -70,7 +70,8 @@ AppAsset::register($this);
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <img src="../../frontend/web/icon/builditup-icon-apps.png" class="icon-slide">
+                <?= Html::img('@web//icon/builditup-icon-apps.png'); ?>
+                <!-- <img src="../../frontend/web/icon/builditup-icon-apps.png" class="icon-slide"> -->
                 <li class="sidebar-brand"> 
                     <a href="#">
                        Build It Up!

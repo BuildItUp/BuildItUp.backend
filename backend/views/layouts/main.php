@@ -27,6 +27,7 @@ AppAsset::register($this);
     <!-- Custom CSS -->
     <!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
     <?= Html::cssFile('@web/css/simple-sidebar.css') ?>
+    <?= Html::cssFile('@web/css/site.css') ?>
 <body>
 <?php $this->beginBody() ?>
 
