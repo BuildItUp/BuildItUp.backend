@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel common/models\ProjectSearch */
+/* @var $searchModel common\models\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
@@ -22,7 +22,7 @@ $this->registerJs($search);
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?>
+       <!--  <?= Html::a('Create Project', ['create'], ['class' => 'btn btn-success']) ?> -->
         <?= Html::a('Advance Search', '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
@@ -49,12 +49,12 @@ $this->registerJs($search);
                 'label' => 'Customer',
                 'value' => function($model){
                     if ($model->customer)
-                    {return $model->customer->name;}
+                    {return $model->customer->fullname;}
                     else
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\common\models\Customer::find()->asArray()->all(), 'id', 'fullname'),
+                'filter' => \yii\helpers\ArrayHelper::map(\common\models\Customer::find()->asArray()->all(), 'id', 'id'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
@@ -81,8 +81,10 @@ $this->registerJs($search);
         // 'fixed_budget',
         // 'start',
         // 'finish',
+        // 'status',
         [
             'class' => 'yii\grid\ActionColumn',
+           'template' => '{update} {delete}',
         ],
     ]; 
     ?>

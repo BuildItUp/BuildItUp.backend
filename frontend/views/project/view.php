@@ -51,11 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'fixed_budget',
         'start',
         'finish',
+        'status',
     ];
     echo DetailView::widget([
         'model' => $model,
         'attributes' => $gridColumn
-    ]); 
+    ]);
 ?>
     </div>
     
@@ -82,7 +83,48 @@ if($providerProgress->totalCount){
     ]);
 }
 ?>
+
     </div>
+    <div class="row">
+        <h4>Customer<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnCustomer = [
+        ['attribute' => 'id', 'visible' => false],
+        'user_id',
+        [
+            'attribute' => 'city.name',
+            'label' => 'City',
+        ],
+        'fullname',
+        'citizen_id',
+        'photo_path',
+        'address:ntext',
+        'phone_number',
+        'email',
+        'budget',
+    ];
+    echo DetailView::widget([
+        'model' => $model,
+        'attributes' => $gridColumn
+    ]);
+    ?>
+</div>
+    <div class="row">
+        <h4>Cities<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnCities = [
+        ['attribute' => 'id', 'visible' => false],
+        'provinces_id',
+        'name',
+    ];
+    echo DetailView::widget([
+        'model' => $model,
+        'attributes' => $gridColumn
+    ]);
+    ?>
+</div>
     
     <div class="row">
 <?php
@@ -129,5 +171,6 @@ if($providerWorker->totalCount){
     ]);
 }
 ?>
+
     </div>
 </div>

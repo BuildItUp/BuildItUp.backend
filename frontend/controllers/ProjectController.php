@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Project;
 use common\models\ProjectSearch;
+use common\models\Worker;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class ProjectController extends Controller
 {
+    public $worker;
     public function behaviors()
     {
         return [
@@ -46,7 +48,7 @@ class ProjectController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProjectSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search_worker(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -101,10 +103,14 @@ class ProjectController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
 
+        $model = $this->findModel($id);
+      
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+            // Worker::updateProject(Yii::$app->user->identity->id,$model->id);
+          
             return $this->redirect(['view', 'id' => $model->id]);
+            // }
         } else {
             return $this->render('update', [
                 'model' => $model,

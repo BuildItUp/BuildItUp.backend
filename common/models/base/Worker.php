@@ -134,13 +134,18 @@ class Worker extends \yii\db\ActiveRecord
     {
         return $this->hasOne(\common\models\Project::className(), ['id' => 'project_id']);
     }
+     public function getProjectWorker($id)
+    {
+        
+        return $this->hasOne(\common\models\Project::className(), [$id => 'project_id']);
+    }
         
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUser($id)
     {
-        return $this->hasOne(\common\models\User::className(), ['id' => 'user_id']);
+        return $this->hasOne(\common\models\User::className(), [$id => 'user_id']);
     }
         
     /**
@@ -198,5 +203,11 @@ class Worker extends \yii\db\ActiveRecord
     public static function find()
     {
         return new \common\models\WorkerQuery(get_called_class());
+    }
+    public function updateProject ($id,$pid)
+    {
+        $query=Worker::find()->where('user_id'==$id);
+        $query->project_id = $pid;
+        $qury->save();
     }
 }

@@ -21,6 +21,11 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $fixed_budget
  * @property string $start
  * @property string $finish
+ * @property integer $status
+ * @property string $created_by
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $updated_by
  *
  * @property \common\models\Progress[] $progresses
  * @property \common\models\Customer $customer
@@ -31,40 +36,42 @@ class Project extends \yii\db\ActiveRecord
 {
     use \mootensai\relation\RelationTrait;
 
+
+    /**
+    * This function helps \mootensai\relation\RelationTrait runs faster
+    * @return array relation names of this model
+    */
+    public function relationNames()
+    {
+        return [
+            'progresses',
+            'customer',
+            'city',
+            'workers'
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['customer_id', 'city_id', 'estimated_budget', 'fixed_budget'], 'integer'],
+            [['customer_id', 'city_id', 'estimated_budget', 'fixed_budget', 'status'], 'integer'],
             [['description', 'address'], 'string'],
-            [['city_id', 'address'], 'required'],
-            [['start', 'finish'], 'safe'],
-            [['name'], 'string', 'max' => 255],
-            [['type'], 'string', 'max' => 50],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['city_id', 'address', 'created_by', 'updated_by'], 'required'],
+            [['start', 'finish', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'created_by', 'updated_by'], 'string', 'max' => 255],
+            [['type'], 'string', 'max' => 50]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'project';
-    }
-
-    /**
-     * 
-     * @return string
-     * overwrite function optimisticLock
-     * return string name of field are used to stored optimistic lock 
-     * 
-     */
-    public function optimisticLock() {
-        return 'lock';
     }
 
     /**
@@ -84,6 +91,7 @@ class Project extends \yii\db\ActiveRecord
             'fixed_budget' => 'Fixed Budget',
             'start' => 'Start',
             'finish' => 'Finish',
+            'status' => 'Status',
         ];
     }
     
@@ -122,7 +130,7 @@ class Project extends \yii\db\ActiveRecord
 /**
      * @inheritdoc
      * @return array mixed
-     */ 
+     */
     public function behaviors()
     {
         return [
@@ -130,7 +138,6 @@ class Project extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'created_at',
                 'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
             ],
             'blameable' => [
                 'class' => BlameableBehavior::className(),
@@ -144,9 +151,10 @@ class Project extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * @inheritdoc
-     * @return \app\models\ProjectQuery the active query used by this AR class.
+     * @return \common\models\ProjectQuery the active query used by this AR class.
      */
     public static function find()
     {

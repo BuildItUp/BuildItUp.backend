@@ -36,6 +36,7 @@ use kartik\grid\GridView;
         'fixed_budget',
         'start',
         'finish',
+        'status',
     ];
     echo DetailView::widget([
         'model' => $model,
