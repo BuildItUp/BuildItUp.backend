@@ -27,7 +27,8 @@ AppAsset::register($this);
     <!-- Custom CSS -->
     <!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
     <?= Html::cssFile('@web/css/simple-sidebar.css') ?>
-<body>
+    <?= Html::cssFile('@web/css/site.css') ?>
+<body class="transparent">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -69,7 +70,8 @@ AppAsset::register($this);
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
+                <img src="../../frontend/web/icon/builditup-icon-apps.png" class="icon-slide">
+                <li class="sidebar-brand"> 
                     <a href="#">
                        Build It Up!
                     </a>
@@ -143,7 +145,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-
+<!-- 
 <footer class="footer">
     <div class="container-fluid">
         <p class="pull-left">&copy; TimBersaw <?= date('Y') ?></p>
@@ -151,7 +153,7 @@ AppAsset::register($this);
         <p class="pull-right"><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a></p>
         
     </div>
-</footer>
+</footer> -->
  </div>
 <?= Html::jsFile('@web/js/jquery.js') ?>
     <!-- Bootstrap Core JavaScript -->
