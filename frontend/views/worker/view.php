@@ -74,216 +74,216 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <div class="row">
 <?php
-if($providerBudgetLog->totalCount){
-    $gridColumnBudgetLog = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-                        [
-                'attribute' => 'customer.id',
-                'label' => 'Customer'
-            ],
-            'date',
-            'action',
-            'amount',
-            'token',
-    ];
-    echo Gridview::widget([
-        'dataProvider' => $providerBudgetLog,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-budget-log']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Budget Log'),
-        ],
-        'export' => false,
-        'columns' => $gridColumnBudgetLog
-    ]);
-}
+// if($providerBudgetLog->totalCount){
+//     $gridColumnBudgetLog = [
+//         ['class' => 'yii\grid\SerialColumn'],
+//             ['attribute' => 'id', 'visible' => false],
+//                         [
+//                 'attribute' => 'customer.id',
+//                 'label' => 'Customer'
+//             ],
+//             'date',
+//             'action',
+//             'amount',
+//             'token',
+//     ];
+//     echo Gridview::widget([
+//         'dataProvider' => $providerBudgetLog,
+//         'pjax' => true,
+//         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-budget-log']],
+//         'panel' => [
+//             'type' => GridView::TYPE_PRIMARY,
+//             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Budget Log'),
+//         ],
+//         'export' => false,
+//         'columns' => $gridColumnBudgetLog
+//     ]);
+// }
 ?>
 
     </div>
     
     <div class="row">
 <?php
-if($providerCashFlow->totalCount){
-    $gridColumnCashFlow = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-            [
-                'attribute' => 'customer.id',
-                'label' => 'Customer'
-            ],
-                        'date',
-            'amount',
-            'description:ntext',
-            'to_budget',
-    ];
-    echo Gridview::widget([
-        'dataProvider' => $providerCashFlow,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-cash-flow']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Cash Flow'),
-        ],
-        'export' => false,
-        'columns' => $gridColumnCashFlow
-    ]);
-}
+// if($providerCashFlow->totalCount){
+//     $gridColumnCashFlow = [
+//         ['class' => 'yii\grid\SerialColumn'],
+//             ['attribute' => 'id', 'visible' => false],
+//             [
+//                 'attribute' => 'customer.id',
+//                 'label' => 'Customer'
+//             ],
+//                         'date',
+//             'amount',
+//             'description:ntext',
+//             'to_budget',
+//     ];
+//     echo Gridview::widget([
+//         'dataProvider' => $providerCashFlow,
+//         'pjax' => true,
+//         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-cash-flow']],
+//         'panel' => [
+//             'type' => GridView::TYPE_PRIMARY,
+//             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Cash Flow'),
+//         ],
+//         'export' => false,
+//         'columns' => $gridColumnCashFlow
+//     ]);
+// }
 ?>
 
     </div>
     
     <div class="row">
 <?php
-if($providerColleagues->totalCount){
-    $gridColumnColleagues = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-                            ];
-    echo Gridview::widget([
-        'dataProvider' => $providerColleagues,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-colleagues']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Colleagues'),
-        ],
-        'export' => false,
-        'columns' => $gridColumnColleagues
-    ]);
-}
+// if($providerColleagues->totalCount){
+//     $gridColumnColleagues = [
+//         ['class' => 'yii\grid\SerialColumn'],
+//             ['attribute' => 'id', 'visible' => false],
+//                             ];
+//     echo Gridview::widget([
+//         'dataProvider' => $providerColleagues,
+//         'pjax' => true,
+//         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-colleagues']],
+//         'panel' => [
+//             'type' => GridView::TYPE_PRIMARY,
+//             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Colleagues'),
+//         ],
+//         'export' => false,
+//         'columns' => $gridColumnColleagues
+//     ]);
+// }
 ?>
 
     </div>
     
     <div class="row">
 <?php
-if($providerCoveredLoc->totalCount){
-    $gridColumnCoveredLoc = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-            [
-                'attribute' => 'city.name',
-                'label' => 'City'
-            ],
-                ];
-    echo Gridview::widget([
-        'dataProvider' => $providerCoveredLoc,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-covered-loc']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Covered Loc'),
-        ],
-        'export' => false,
-        'columns' => $gridColumnCoveredLoc
-    ]);
-}
+// if($providerCoveredLoc->totalCount){
+//     $gridColumnCoveredLoc = [
+//         ['class' => 'yii\grid\SerialColumn'],
+//             ['attribute' => 'id', 'visible' => false],
+//             [
+//                 'attribute' => 'city.name',
+//                 'label' => 'City'
+//             ],
+//                 ];
+//     echo Gridview::widget([
+//         'dataProvider' => $providerCoveredLoc,
+//         'pjax' => true,
+//         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-covered-loc']],
+//         'panel' => [
+//             'type' => GridView::TYPE_PRIMARY,
+//             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Covered Loc'),
+//         ],
+//         'export' => false,
+//         'columns' => $gridColumnCoveredLoc
+//     ]);
+// }
 ?>
 
     </div>
     <div class="row">
-        <h4>Project<?= ' '. Html::encode($this->title) ?></h4>
+  <!--       <h4>Project<?= ' '. Html::encode($this->title) ?></h4> -->
     </div>
     <?php 
-    $gridColumnProject = [
-        ['attribute' => 'id', 'visible' => false],
-        'customer_id',
-        'name',
-        'type',
-        'description',
-        [
-            'attribute' => 'city.name',
-            'label' => 'City',
-        ],
-        'address',
-        'estimated_budget',
-        'fixed_budget',
-        'start',
-        'finish',
-    ];
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => $gridColumn
-    ]);
+    // $gridColumnProject = [
+    //     ['attribute' => 'id', 'visible' => false],
+    //     'customer_id',
+    //     'name',
+    //     'type',
+    //     'description',
+    //     [
+    //         'attribute' => 'city.name',
+    //         'label' => 'City',
+    //     ],
+    //     'address',
+    //     'estimated_budget',
+    //     'fixed_budget',
+    //     'start',
+    //     'finish',
+    // ];
+    // echo DetailView::widget([
+    //     'model' => $model,
+    //     'attributes' => $gridColumn
+    // ]);
     ?>
 </div>
     <div class="row">
-        <h4>User<?= ' '. Html::encode($this->title) ?></h4>
+        <!-- <h4>User<?= ' '. Html::encode($this->title) ?></h4> -->
     </div>
     <?php 
-    $gridColumnUser = [
-        ['attribute' => 'id', 'visible' => false],
-        'username',
-        'auth_key',
-        'password_hash',
-        'password_reset_token',
-        'access_token',
-        'email:email',
-        'pin',
-        'login_as',
-        'status',
-    ];
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => $gridColumn
-    ]);
+    // $gridColumnUser = [
+    //     ['attribute' => 'id', 'visible' => false],
+    //     'username',
+    //     'auth_key',
+    //     'password_hash',
+    //     'password_reset_token',
+    //     'access_token',
+    //     'email:email',
+    //     'pin',
+    //     'login_as',
+    //     'status',
+    // ];
+    // echo DetailView::widget([
+    //     'model' => $model,
+    //     'attributes' => $gridColumn
+    // ]);
     ?>
 </div>
     <div class="row">
-        <h4>Cities<?= ' '. Html::encode($this->title) ?></h4>
+        <!-- <h4>Cities<?= ' '. Html::encode($this->title) ?></h4> -->
     </div>
     <?php 
-    $gridColumnCities = [
-        ['attribute' => 'id', 'visible' => false],
-        'provinces_id',
-        'name',
-    ];
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => $gridColumn
-    ]);
+    // $gridColumnCities = [
+    //     ['attribute' => 'id', 'visible' => false],
+    //     'provinces_id',
+    //     'name',
+    // ];
+    // echo DetailView::widget([
+    //     'model' => $model,
+    //     'attributes' => $gridColumn
+    // ]);
     ?>
 </div>
     <div class="row">
-        <h4>Specialization<?= ' '. Html::encode($this->title) ?></h4>
+        <!-- <h4>Specialization<?= ' '. Html::encode($this->title) ?></h4> -->
     </div>
     <?php 
-    $gridColumnSpecialization = [
-        ['attribute' => 'id', 'visible' => false],
-        'name',
-    ];
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => $gridColumn
-    ]);
+    // $gridColumnSpecialization = [
+    //     ['attribute' => 'id', 'visible' => false],
+    //     'name',
+    // ];
+    // echo DetailView::widget([
+    //     'model' => $model,
+    //     'attributes' => $gridColumn
+    // ]);
     ?>
 </div>
     
     <div class="row">
 <?php
-if($providerWorkerContacts->totalCount){
-    $gridColumnWorkerContacts = [
-        ['class' => 'yii\grid\SerialColumn'],
-            ['attribute' => 'id', 'visible' => false],
-                        [
-                'attribute' => 'customer.id',
-                'label' => 'Customer'
-            ],
-    ];
-    echo Gridview::widget([
-        'dataProvider' => $providerWorkerContacts,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-worker-contacts']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Worker Contacts'),
-        ],
-        'export' => false,
-        'columns' => $gridColumnWorkerContacts
-    ]);
-}
+// if($providerWorkerContacts->totalCount){
+//     $gridColumnWorkerContacts = [
+//         ['class' => 'yii\grid\SerialColumn'],
+//             ['attribute' => 'id', 'visible' => false],
+//                         [
+//                 'attribute' => 'customer.id',
+//                 'label' => 'Customer'
+//             ],
+//     ];
+//     echo Gridview::widget([
+//         'dataProvider' => $providerWorkerContacts,
+//         'pjax' => true,
+//         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-worker-contacts']],
+//         'panel' => [
+//             'type' => GridView::TYPE_PRIMARY,
+//             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode('Worker Contacts'),
+//         ],
+//         'export' => false,
+//         'columns' => $gridColumnWorkerContacts
+//     ]);
+// }
 ?>
 
     </div>
