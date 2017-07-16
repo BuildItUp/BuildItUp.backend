@@ -15,7 +15,7 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="worker-index">
+<div class="worker-index transparent2">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

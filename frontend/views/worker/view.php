@@ -11,7 +11,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Worker', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="worker-view">
+<div class="worker-view transparent2">
 
     <div class="row">
         <div class="col-sm-9">
