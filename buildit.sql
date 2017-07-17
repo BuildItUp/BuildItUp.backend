@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2017 at 06:42 PM
+-- Generation Time: Jul 17, 2017 at 11:54 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -36,6 +36,13 @@ CREATE TABLE `budget_log` (
   `token` char(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `budget_log`
+--
+
+INSERT INTO `budget_log` (`id`, `worker_id`, `customer_id`, `date`, `action`, `amount`, `token`) VALUES
+(5, 1, NULL, '2017-07-17 08:50:57', 'Withdraw', 65000, 'MqlCr');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,14 @@ CREATE TABLE `cash_flow` (
   `description` text,
   `to_budget` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cash_flow`
+--
+
+INSERT INTO `cash_flow` (`id`, `customer_id`, `worker_id`, `date`, `amount`, `description`, `to_budget`) VALUES
+(1, NULL, 1, '2017-07-17 07:16:57', 50000, NULL, 1),
+(2, 3, NULL, '2017-07-17 07:17:44', 45000, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -677,6 +692,13 @@ CREATE TABLE `progress` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `progress`
+--
+
+INSERT INTO `progress` (`id`, `project_id`, `photo_path`, `description`, `date`) VALUES
+(1, 2, '', 'Progress pertama', '2017-07-17 02:54:36');
+
 -- --------------------------------------------------------
 
 --
@@ -707,7 +729,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`id`, `customer_id`, `name`, `type`, `description`, `city_id`, `address`, `estimated_budget`, `fixed_budget`, `start`, `finish`, `status`, `created_by`, `created_at`, `updated_at`, `updated_by`) VALUES
-(1, 2, 'Buat Rumah', 'Build', 'Buatin Rumah ya pak', 1101, 'Jalan Salak', 50000, NULL, NULL, NULL, 0, 'admin', '2017-07-16 13:51:02', '0000-00-00 00:00:00', '3');
+(1, 2, 'Buat Rumah', 'Build', 'Buatin Rumah ya pak', 1101, 'Jalan Salak', 50000, NULL, NULL, NULL, 1, 'admin', '2017-07-16 13:51:02', '0000-00-00 00:00:00', '3'),
+(2, 3, 'Renovasi Apartemen', 'Renovation', 'Tolong Renovasikan apartemen saya', 1106, 'Jl Nangka', 300000000, 450000000, '2017-07-14', '2017-07-28', 1, 'admin', '2017-07-17 02:20:50', '0000-00-00 00:00:00', '3');
 
 -- --------------------------------------------------------
 
@@ -844,7 +867,7 @@ CREATE TABLE `worker` (
 --
 
 INSERT INTO `worker` (`id`, `project_id`, `user_id`, `city_id`, `specialization_id`, `fullname`, `citizen_id`, `birthdate`, `photo_path`, `address`, `phone_number`, `email`, `graduate`, `graduate_date`, `avg_rating`, `personal_budget`, `project_budget`, `status`) VALUES
-(1, NULL, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 0, 0, 1);
+(1, 2, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -985,12 +1008,12 @@ ALTER TABLE `worker_contacts`
 -- AUTO_INCREMENT for table `budget_log`
 --
 ALTER TABLE `budget_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `cash_flow`
 --
 ALTER TABLE `cash_flow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `cities`
 --
@@ -1025,12 +1048,12 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `provinces`
 --
@@ -1050,7 +1073,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `worker`
 --
 ALTER TABLE `worker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `worker_contacts`
 --
