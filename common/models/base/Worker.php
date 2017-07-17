@@ -189,10 +189,10 @@ class Worker extends \yii\db\ActiveRecord
             //     'createdByAttribute' => 'created_by',
             //     'updatedByAttribute' => 'updated_by',
             // ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+            // 'uuid' => [
+            //     'class' => UUIDBehavior::className(),
+            //     'column' => 'id',
+            // ],
         ];
     }
 

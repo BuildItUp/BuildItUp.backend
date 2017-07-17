@@ -108,6 +108,7 @@ class BudgetLog extends \yii\db\ActiveRecord
             //     'class' => UUIDBehavior::className(),
             //     'column' => 'id',
             // ],
+       
         ];
     }
 

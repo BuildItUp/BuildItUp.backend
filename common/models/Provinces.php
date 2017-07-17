@@ -18,8 +18,8 @@ class Provinces extends BaseProvinces
         return array_replace_recursive(parent::rules(),
 	    [
             [['name'], 'string', 'max' => 255],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

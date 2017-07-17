@@ -21,10 +21,7 @@ use common\models\Worker;
 
     <?= $form->field($model, 'worker_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\common\models\Worker::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
-        'options' => ['placeholder' => 'Choose Worker',
-                      'value' => $worker->id,
-                      'disabled' => true,
-                     ],
+        'options' => ['placeholder' => 'Choose Worker',],
         'pluginOptions' => [
             'allowClear' => true
         ],

@@ -14,7 +14,9 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <?php 
+    if(isset(Yii::$app->user->identity)){
     $worker = Worker::findOne(['user_id'=>Yii::$app->user->identity->id]);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">

@@ -28,8 +28,8 @@ class Notification extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'integer'],
             [['message'], 'string'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -79,21 +79,21 @@ class Notification extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
+            // 'timestamp' => [
+            //     'class' => TimestampBehavior::className(),
+            //     'createdAtAttribute' => 'created_at',
+            //     'updatedAtAttribute' => 'updated_at',
+            //     'value' => new \yii\db\Expression('NOW()'),
+            // ],
+            // 'blameable' => [
+            //     'class' => BlameableBehavior::className(),
+            //     'createdByAttribute' => 'created_by',
+            //     'updatedByAttribute' => 'updated_by',
+            // ],
+            // 'uuid' => [
+            //     'class' => UUIDBehavior::className(),
+            //     'column' => 'id',
+            // ],
         ];
     }
 

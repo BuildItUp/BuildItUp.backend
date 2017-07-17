@@ -18,8 +18,8 @@ class Colleagues extends BaseColleagues
         return array_replace_recursive(parent::rules(),
 	    [
             [['worker_id', 'wor_worker_id'], 'integer'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

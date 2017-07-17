@@ -30,7 +30,7 @@ class BudgetLogController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete','project'],
                         'roles' => ['@']
                     ],
                     [
@@ -82,13 +82,21 @@ class BudgetLogController extends Controller
             $model->action = 'Withdraw';
             $model->worker_id = $worker->id;
               $model->token = Yii::$app->getSecurity()->generateRandomString(5);
-            if($model->save()){
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->amount <= $worker->personal_budget){
+                if($model->save()){
+                     return $this->redirect(['view', 'id' => $model->id]);
+                     }
+                 else
+                 {
+                     return 'wow';
+                     }
             }
-            else
-            {
-                return 'wow';
-            }
+           else {
+             Yii::$app->getSession()->setFlash('error', 'Amount Exceed Budget Balance');
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -96,6 +104,35 @@ class BudgetLogController extends Controller
         }
     }
 
+    public function actionProject()
+    {
+        $model = new BudgetLog();
+        $worker = Worker::findOne(['user_id' => Yii::$app->user->identity->id]);
+        if ($model->loadAll(Yii::$app->request->post()) ) {
+            $model->action = 'Withdraw Project';
+            $model->worker_id = $worker->id;
+              $model->token = Yii::$app->getSecurity()->generateRandomString(5);
+            if($model->amount <= $worker->project_budget){
+                if($model->save()){
+                     return $this->redirect(['view', 'id' => $model->id]);
+                     }
+                 else
+                 {
+                     return 'wow';
+                     }
+            }
+           else {
+             Yii::$app->getSession()->setFlash('error', 'Amount Exceed Budget Balance');
+            return $this->render('project', [
+                'model' => $model,
+            ]);
+        }
+        } else {
+            return $this->render('project', [
+                'model' => $model,
+            ]);
+        }
+    }
     /**
      * Updates an existing BudgetLog model.
      * If update is successful, the browser will be redirected to the 'view' page.

@@ -38,7 +38,7 @@ use kartik\widgets\SwitchInput;
      // $form->field($model, 'date')->textInput(['placeholder' => 'Date']) 
      ?>
 
-    <?= $form->field($model, 'action')->textInput(['maxlength' => true, 'placeholder' => 'Action','value'=>'Withdraw','disabled'=>true]) ?>
+    <?= $form->field($model, 'action')->textInput(['maxlength' => true, 'placeholder' => 'Action','value'=>'Withdraw Project','disabled'=>true]) ?>
     
     <?= $form->field($model, 'amount')->textInput(['maxlength' => true, 'placeholder' => 'Amount']) ?>
      <?= Yii::$app->session->getFlash('error'); ?>

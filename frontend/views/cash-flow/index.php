@@ -24,7 +24,8 @@ $this->registerJs($search);
     <p>
        
         <?= Html::a('Advance Search', '#', ['class' => 'btn btn-info search-button']) ?>
-        <?= Html::a('Withdraw', '@web/budget-log/create', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Withdraw Personal', '@web/budget-log/create', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Withdraw Project', '@web/budget-log/project', ['class' => 'btn btn-success']) ?>
     </p>
     <div class="search-form" style="display:none">
         <?=  $this->render('_search', ['model' => $searchModel]); ?>

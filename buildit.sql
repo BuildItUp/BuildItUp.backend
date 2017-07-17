@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2017 at 11:54 AM
+-- Generation Time: Jul 17, 2017 at 02:40 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -41,7 +41,8 @@ CREATE TABLE `budget_log` (
 --
 
 INSERT INTO `budget_log` (`id`, `worker_id`, `customer_id`, `date`, `action`, `amount`, `token`) VALUES
-(5, 1, NULL, '2017-07-17 08:50:57', 'Withdraw', 65000, 'MqlCr');
+(5, 1, NULL, '2017-07-17 08:50:57', 'Withdraw', 65000, 'MqlCr'),
+(6, 1, NULL, '2017-07-17 12:31:24', 'Withdraw Project', 90000, 'p3LJy');
 
 -- --------------------------------------------------------
 
@@ -717,20 +718,16 @@ CREATE TABLE `project` (
   `fixed_budget` bigint(20) DEFAULT NULL,
   `start` date DEFAULT NULL,
   `finish` date DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `created_by` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_by` varchar(255) NOT NULL
+  `status` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `customer_id`, `name`, `type`, `description`, `city_id`, `address`, `estimated_budget`, `fixed_budget`, `start`, `finish`, `status`, `created_by`, `created_at`, `updated_at`, `updated_by`) VALUES
-(1, 2, 'Buat Rumah', 'Build', 'Buatin Rumah ya pak', 1101, 'Jalan Salak', 50000, NULL, NULL, NULL, 1, 'admin', '2017-07-16 13:51:02', '0000-00-00 00:00:00', '3'),
-(2, 3, 'Renovasi Apartemen', 'Renovation', 'Tolong Renovasikan apartemen saya', 1106, 'Jl Nangka', 300000000, 450000000, '2017-07-14', '2017-07-28', 1, 'admin', '2017-07-17 02:20:50', '0000-00-00 00:00:00', '3');
+INSERT INTO `project` (`id`, `customer_id`, `name`, `type`, `description`, `city_id`, `address`, `estimated_budget`, `fixed_budget`, `start`, `finish`, `status`) VALUES
+(1, 2, 'Buat Rumah', 'Build', 'Buatin Rumah ya pak', 1101, 'Jalan Salak', 50000, NULL, NULL, NULL, 1),
+(2, 3, 'Renovasi Apartemen', 'Renovation', 'Tolong Renovasikan apartemen saya', 1106, 'Jl Nangka', 300000000, 450000000, '2017-07-14', '2017-07-28', 1);
 
 -- --------------------------------------------------------
 
@@ -859,15 +856,19 @@ CREATE TABLE `worker` (
   `avg_rating` float DEFAULT NULL,
   `personal_budget` bigint(20) DEFAULT NULL,
   `project_budget` bigint(20) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL
+  `status` tinyint(1) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `worker`
 --
 
-INSERT INTO `worker` (`id`, `project_id`, `user_id`, `city_id`, `specialization_id`, `fullname`, `citizen_id`, `birthdate`, `photo_path`, `address`, `phone_number`, `email`, `graduate`, `graduate_date`, `avg_rating`, `personal_budget`, `project_budget`, `status`) VALUES
-(1, 2, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 0, 0, 1);
+INSERT INTO `worker` (`id`, `project_id`, `user_id`, `city_id`, `specialization_id`, `fullname`, `citizen_id`, `birthdate`, `photo_path`, `address`, `phone_number`, `email`, `graduate`, `graduate_date`, `avg_rating`, `personal_budget`, `project_budget`, `status`, `created_by`, `created_at`, `updated_at`, `updated_by`) VALUES
+(1, 2, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 100000, 100000, 1, NULL, '2017-07-17 12:33:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1008,7 +1009,7 @@ ALTER TABLE `worker_contacts`
 -- AUTO_INCREMENT for table `budget_log`
 --
 ALTER TABLE `budget_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `cash_flow`
 --

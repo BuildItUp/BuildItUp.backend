@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ebc0603648e1607c090233ff26c3ba5a",
+    "content-hash": "f193e2da7637d17a93e468ec7df7988c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -707,7 +707,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-01-14 11:34:27"
+            "time": "2017-01-14T11:34:27+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -1854,7 +1854,7 @@
         },
         {
             "name": "kartik-v/yii2-widget-switchinput",
-            "version": "v1.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-switchinput.git",
@@ -2173,7 +2173,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2017-07-15 15:40:50"
+            "time": "2017-07-15T15:40:50+00:00"
         },
         {
             "name": "mootensai/yii2-jsblock",
@@ -5161,7 +5161,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mootensai/yii2-enhanced-gii": 20,
-        "kartik-v/yii2-datecontrol": 20
+        "kartik-v/yii2-datecontrol": 20,
+        "kartik-v/yii2-widget-switchinput": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -18,8 +18,8 @@ class CoveredLoc extends BaseCoveredLoc
         return array_replace_recursive(parent::rules(),
 	    [
             [['city_id', 'worker_id'], 'integer'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	
