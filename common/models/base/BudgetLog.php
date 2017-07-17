@@ -35,8 +35,8 @@ class BudgetLog extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['action'], 'string', 'max' => 255],
             [['token'], 'string', 'max' => 25],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            //[['lock'], 'default', 'value' => '0'],
+            //[['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -55,9 +55,9 @@ class BudgetLog extends \yii\db\ActiveRecord
      * return string name of field are used to stored optimistic lock 
      * 
      */
-    public function optimisticLock() {
-        return 'lock';
-    }
+    // public function optimisticLock() {
+    //     return 'lock';
+    // }
 
     /**
      * @inheritdoc
@@ -95,26 +95,26 @@ class BudgetLog extends \yii\db\ActiveRecord
      * @inheritdoc
      * @return array mixed
      */ 
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
-        ];
-    }
+    // public function behaviors()
+    // {
+    //     return [
+    //         'timestamp' => [
+    //             'class' => TimestampBehavior::className(),
+    //             'createdAtAttribute' => 'created_at',
+    //             'updatedAtAttribute' => 'updated_at',
+    //             'value' => new \yii\db\Expression('NOW()'),
+    //         ],
+    //         'blameable' => [
+    //             'class' => BlameableBehavior::className(),
+    //             'createdByAttribute' => 'created_by',
+    //             'updatedByAttribute' => 'updated_by',
+    //         ],
+    //         'uuid' => [
+    //             'class' => UUIDBehavior::className(),
+    //             'column' => 'id',
+    //         ],
+    //     ];
+    // }
 
     /**
      * @inheritdoc

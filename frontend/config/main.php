@@ -94,6 +94,13 @@ return [
                         'GET get-all' => 'getAll',
                     ],
                 ],
+                [ //Route untuk city
+                    'class' => 'yii\rest\urlRule',
+                    'controller' => 'api/top-up',
+                    'extraPatterns' => [
+                        'POST submit' => 'submit',
+                    ],
+                ],
             ],
         ],
         

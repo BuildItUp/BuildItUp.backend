@@ -20,6 +20,6 @@ class CityController extends \yii\rest\ActiveController
 	}
 
 	public function actionGetAll() {
-		return Cities::find()->all();
+		return ['status' => 'success', 'message' => 'Get All City succeed', 'data' => Cities::find()->all()];
 	}
 }
