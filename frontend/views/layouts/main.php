@@ -28,10 +28,10 @@ AppAsset::register($this);
     <!-- <link href="css/simple-sidebar.css" rel="stylesheet"> -->
     <?= Html::cssFile('@web/css/simple-sidebar.css') ?>
     <?= Html::cssFile('@web/css/site.css') ?>
-<body class="transparent">
+<body >
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div class="wrap transparent">
     <?php
     // NavBar::begin([
     //     'brandLabel' => 'My Company',
