@@ -9,10 +9,13 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-
+use common\models\Worker;
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
+<?php 
+    $worker = Worker::findOne(['user_id'=>Yii::$app->user->identity->id]);
+?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
@@ -102,22 +105,28 @@ AppAsset::register($this);
                 <?php 
                         if(isset(Yii::$app->user->identity)){?>
                   <li>
-                    <?= Html::a('Progress',['progress/index'])?>
+                    <?= Html::a('Progress',['project/update?id='.$worker->project_id])?>
                 </li>
                 <?php } ?>
                 
                  <?php 
                         if(isset(Yii::$app->user->identity)){?>
                    <li>
-                    <?= Html::a('Project Log',['log/index'])?>
+                    <?= Html::a('Budget',['cash-flow/index'])?>
                 </li>
+                  <?php } ?>
                 <?php 
                         if(isset(Yii::$app->user->identity)){?>
                   <li>
                     <?= Html::a('Account',['worker/view?id='.Yii::$app->user->identity->id])?>
                 </li>
                 <?php } ?>
-              <?php } ?>
+                 <?php 
+                        if(isset(Yii::$app->user->identity)){?>
+                   <li>
+                    <?= Html::a('Withdrawal Log',['budget-log/index'])?>
+                </li>
+                  <?php } ?>
                    <?php if(Yii::$app->user->isGuest) {
                             ?><li>    <?= Html::a('Login',['site/login'])?> </li>
                        <?php }

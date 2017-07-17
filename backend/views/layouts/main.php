@@ -120,7 +120,7 @@ AppAsset::register($this);
                  <?php 
                         if(isset(Yii::$app->user->identity)){?>
                    <li>
-                    <?= Html::a('Project Log',['log/index'])?>
+                    <?= Html::a('Budget Log',['log/index'])?>
                 </li>
               <?php } ?>
                    <?php if(Yii::$app->user->isGuest) {

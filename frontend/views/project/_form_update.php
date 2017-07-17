@@ -56,7 +56,8 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'address')->textarea(['rows' => 6,'disabled'=>true]) ?>
-
+    <?php 
+    if($model->status == 0){ ?>
     <?= $form->field($model, 'estimated_budget')->textInput(['maxlength' => true, 'placeholder' => 'Estimated Budget','disabled'=>true]) ?>
 
     <?= $form->field($model, 'fixed_budget')->textInput(['maxlength' => true, 'placeholder' => 'Fixed Budget']) ?>
@@ -72,7 +73,13 @@ use yii\widgets\ActiveForm;
             ]
         ],
     ]); ?>
+       
+       <!--  else{ ?>
 
+
+             }
+
+        ?> -->
     <?= $form->field($model, 'finish')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
         'saveFormat' => 'php:Y-m-d',
@@ -85,33 +92,75 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
+         <?php }else{ ?>
+          <?= $form->field($model, 'estimated_budget')->textInput(['maxlength' => true,'disabled'=>true, 'placeholder' => 'Estimated Budget','disabled'=>true]) ?>
+
+    <?= $form->field($model, 'fixed_budget')->textInput(['maxlength' => true, 'disabled'=>true,'placeholder' => 'Fixed Budget']) ?>
+
+    <?= $form->field($model, 'start')->widget(\kartik\datecontrol\DateControl::classname(), [
+        'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
+        'saveFormat' => 'php:Y-m-d',
+        'ajaxConversion' => true,
+        'options' => [
+            'disabled'=>true,
+            'pluginOptions' => [
+                'placeholder' => 'Choose Start',
+                'autoclose' => true,
+               
+            ]
+        ],
+    ]); ?>
+       
+       <!--  else{ ?>
+
+
+             }
+
+        ?> -->
+    <?= $form->field($model, 'finish')->widget(\kartik\datecontrol\DateControl::classname(), [
+        'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
+        'saveFormat' => 'php:Y-m-d',
+        'ajaxConversion' => true,
+        'options' => [
+            'pluginOptions' => [
+                'placeholder' => 'Choose Finish',
+                'autoclose' => true,
+                'disabled'=>true
+            ]
+        ],
+    ]); ?>
+    <?php }?>
+     
+    
     <?= $form->field($model, 'status',['template' => '{input}'])->textInput(['style' => 'display:none','value'=>1]) ?>
    
     <?php
-    // $forms = [
-    //     [
-    //         'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('Progress'),
-    //         'content' => $this->render('_formProgress', [
-    //             'row' => \yii\helpers\ArrayHelper::toArray($model->progresses),
-    //         ]),
-    //     ],
+    if($model->status == 1){
+    $forms = [
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('Progress'),
+            'content' => $this->render('_formProgress', [
+                'row' => \yii\helpers\ArrayHelper::toArray($model->progresses),
+            ]),
+        ],
     //     [
     //         'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('Worker'),
     //         'content' => $this->render('_formWorker', [
     //             'row' => \yii\helpers\ArrayHelper::toArray($model->workers),
     //         ]),
     //     ],
-    // ];
-    // echo kartik\tabs\TabsX::widget([
-    //     'items' => $forms,
-    //     'position' => kartik\tabs\TabsX::POS_ABOVE,
-    //     'encodeLabels' => false,
-    //     'pluginOptions' => [
-    //         'bordered' => true,
-    //         'sideways' => true,
-    //         'enableCache' => false,
-    //     ],
-    // ]);
+    ];
+    echo kartik\tabs\TabsX::widget([
+        'items' => $forms,
+        'position' => kartik\tabs\TabsX::POS_ABOVE,
+        'encodeLabels' => false,
+        'pluginOptions' => [
+            'bordered' => true,
+            'sideways' => true,
+            'enableCache' => false,
+        ],
+    ]);
+        }
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Accept', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

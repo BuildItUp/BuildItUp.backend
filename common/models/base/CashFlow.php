@@ -34,8 +34,7 @@ class CashFlow extends \yii\db\ActiveRecord
             [['customer_id', 'worker_id', 'amount', 'to_budget'], 'integer'],
             [['date'], 'safe'],
             [['description'], 'string'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+           
         ];
     }
     
@@ -54,9 +53,9 @@ class CashFlow extends \yii\db\ActiveRecord
      * return string name of field are used to stored optimistic lock 
      * 
      */
-    public function optimisticLock() {
-        return 'lock';
-    }
+    // public function optimisticLock() {
+    //     return 'lock';
+    // }
 
     /**
      * @inheritdoc

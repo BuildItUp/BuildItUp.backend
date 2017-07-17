@@ -105,12 +105,13 @@ class ProjectController extends Controller
     {
 
         $model = $this->findModel($id);
-      
+        $worker = Worker::findOne(['user_id' => Yii::$app->user->identity->id]);
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             // Worker::updateProject(Yii::$app->user->identity->id,$model->id);
-          
+            $worker->project_id = $model->id;
+            if($worker->save()){
             return $this->redirect(['view', 'id' => $model->id]);
-            // }
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -21,8 +21,7 @@ class BudgetLog extends BaseBudgetLog
             [['date'], 'safe'],
             [['action'], 'string', 'max' => 255],
             [['token'], 'string', 'max' => 25],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+           
         ]);
     }
 	
