@@ -3,51 +3,22 @@
 namespace common\models;
 
 use Yii;
+use \common\models\base\Specialization as BaseSpecialization;
 
 /**
  * This is the model class for table "specialization".
- *
- * @property integer $id
- * @property string $name
- *
- * @property Worker[] $workers
  */
-class Specialization extends \yii\db\ActiveRecord
+class Specialization extends BaseSpecialization
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'specialization';
-    }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [
-            [['name'], 'string', 'max' => 255],
-        ];
+        return array_replace_recursive(parent::rules(),
+	    [
+            [['name'], 'string', 'max' => 255]
+        ]);
     }
-
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
-        ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getWorkers()
-    {
-        return $this->hasMany(Worker::className(), ['specialization_id' => 'id']);
-    }
+	
 }

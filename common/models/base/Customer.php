@@ -44,8 +44,6 @@ class Customer extends \yii\db\ActiveRecord
             [['citizen_id'], 'string', 'max' => 50],
             [['phone_number'], 'string', 'max' => 20],
             [['email'], 'unique'],
-            //[['lock'], 'default', 'value' => '0'],
-            //[['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     

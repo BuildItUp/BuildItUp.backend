@@ -8,7 +8,7 @@ use kartik\grid\GridView;
 /* @var $model common\models\Specialization */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Specialization', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Specializations', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="specialization-view">

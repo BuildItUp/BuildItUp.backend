@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\datecontrol\DateControl;
 /* @var $this yii\web\View */
 /* @var $model common\models\Worker */
 /* @var $form yii\widgets\ActiveForm */
@@ -57,13 +57,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
-    <?= $form->field($model, 'project_id')->widget(\kartik\widgets\Select2::classname(), [
+   <!--  <?= $form->field($model, 'project_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\common\models\Project::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
         'options' => ['placeholder' => 'Choose Project'],
         'pluginOptions' => [
             'allowClear' => true
         ],
-    ]); ?>
+    ]); ?> -->
 
     <?= $form->field($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\common\models\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
@@ -127,28 +127,28 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'avg_rating')->textInput(['placeholder' => 'Avg Rating']) ?>
+   <!--  <?= $form->field($model, 'avg_rating')->textInput(['placeholder' => 'Avg Rating']) ?> -->
 
     <?= $form->field($model, 'personal_budget')->textInput(['maxlength' => true, 'placeholder' => 'Personal Budget']) ?>
 
-    <?= $form->field($model, 'project_budget')->textInput(['maxlength' => true, 'placeholder' => 'Project Budget']) ?>
+    <!-- <?= $form->field($model, 'project_budget')->textInput(['maxlength' => true, 'placeholder' => 'Project Budget']) ?> -->
 
-    <?= $form->field($model, 'status')->checkbox() ?>
+    <!-- <?= $form->field($model, 'status')->checkbox() ?> -->
 
     <?php
     $forms = [
-        [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('BudgetLog'),
-            'content' => $this->render('_formBudgetLog', [
-                'row' => \yii\helpers\ArrayHelper::toArray($model->budgetLogs),
-            ]),
-        ],
-        [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('CashFlow'),
-            'content' => $this->render('_formCashFlow', [
-                'row' => \yii\helpers\ArrayHelper::toArray($model->cashFlows),
-            ]),
-        ],
+        // [
+        //     'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('BudgetLog'),
+        //     'content' => $this->render('_formBudgetLog', [
+        //         'row' => \yii\helpers\ArrayHelper::toArray($model->budgetLogs),
+        //     ]),
+        // ],
+        // [
+        //     'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('CashFlow'),
+        //     'content' => $this->render('_formCashFlow', [
+        //         'row' => \yii\helpers\ArrayHelper::toArray($model->cashFlows),
+        //     ]),
+        // ],
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode('Colleagues'),
             'content' => $this->render('_formColleagues', [
@@ -181,6 +181,7 @@ use yii\widgets\ActiveForm;
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

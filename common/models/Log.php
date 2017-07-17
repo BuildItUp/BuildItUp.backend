@@ -21,8 +21,8 @@ class Log extends BaseLog
             [['date'], 'safe'],
             [['table_name'], 'string', 'max' => 50],
             [['action'], 'string', 'max' => 255],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

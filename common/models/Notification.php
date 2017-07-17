@@ -19,8 +19,8 @@ class Notification extends BaseNotification
 	    [
             [['user_id'], 'integer'],
             [['message'], 'string'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            // [['lock'], 'default', 'value' => '0'],
+            // [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
     }
 	

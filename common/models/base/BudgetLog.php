@@ -35,8 +35,6 @@ class BudgetLog extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['action'], 'string', 'max' => 255],
             [['token'], 'string', 'max' => 25],
-            //[['lock'], 'default', 'value' => '0'],
-            //[['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
     
@@ -54,11 +52,15 @@ class BudgetLog extends \yii\db\ActiveRecord
      * overwrite function optimisticLock
      * return string name of field are used to stored optimistic lock 
      * 
+<<<<<<< HEAD
      */
     // public function optimisticLock() {
     //     return 'lock';
     // }
 
+=======
+  
+>>>>>>> 51982d8dcebf849004270d8999ce6d71c8bb151f
     /**
      * @inheritdoc
      */
@@ -95,6 +97,7 @@ class BudgetLog extends \yii\db\ActiveRecord
      * @inheritdoc
      * @return array mixed
      */ 
+<<<<<<< HEAD
     // public function behaviors()
     // {
     //     return [
@@ -115,6 +118,29 @@ class BudgetLog extends \yii\db\ActiveRecord
     //         ],
     //     ];
     // }
+=======
+    public function behaviors()
+    {
+        return [
+            // 'timestamp' => [
+            //     'class' => TimestampBehavior::className(),
+            //     'createdAtAttribute' => 'created_at',
+            //     'updatedAtAttribute' => 'updated_at',
+            //     'value' => new \yii\db\Expression('NOW()'),
+            // ],
+            // 'blameable' => [
+            //     'class' => BlameableBehavior::className(),
+            //     'createdByAttribute' => 'created_by',
+            //     'updatedByAttribute' => 'updated_by',
+            // ],
+            // 'uuid' => [
+            //     'class' => UUIDBehavior::className(),
+            //     'column' => 'id',
+            // ],
+       
+        ];
+    }
+>>>>>>> 51982d8dcebf849004270d8999ce6d71c8bb151f
 
     /**
      * @inheritdoc

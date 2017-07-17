@@ -24,9 +24,7 @@ class Worker extends BaseWorker
             [['fullname', 'photo_path', 'address', 'email', 'graduate'], 'string', 'max' => 255],
             [['citizen_id'], 'string', 'max' => 50],
             [['phone_number'], 'string', 'max' => 20],
-            [['email'], 'unique'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            [['email'], 'unique']
         ]);
     }
 	

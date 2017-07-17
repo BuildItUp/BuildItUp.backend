@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2017 at 12:35 PM
+-- Generation Time: Jul 17, 2017 at 02:40 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -36,6 +36,14 @@ CREATE TABLE `budget_log` (
   `token` char(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `budget_log`
+--
+
+INSERT INTO `budget_log` (`id`, `worker_id`, `customer_id`, `date`, `action`, `amount`, `token`) VALUES
+(5, 1, NULL, '2017-07-17 08:50:57', 'Withdraw', 65000, 'MqlCr'),
+(6, 1, NULL, '2017-07-17 12:31:24', 'Withdraw Project', 90000, 'p3LJy');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +59,14 @@ CREATE TABLE `cash_flow` (
   `description` text,
   `to_budget` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cash_flow`
+--
+
+INSERT INTO `cash_flow` (`id`, `customer_id`, `worker_id`, `date`, `amount`, `description`, `to_budget`) VALUES
+(1, NULL, 1, '2017-07-17 07:16:57', 50000, NULL, 1),
+(2, 3, NULL, '2017-07-17 07:17:44', 45000, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -634,7 +650,8 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`id`, `user_id`, `city_id`, `fullname`, `citizen_id`, `photo_path`, `address`, `phone_number`, `email`, `budget`) VALUES
 (2, 1, 3578, 'Rizal Fauzy', '3578061207970004', '/image/customer/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '085730485464', 'sam.fauzy@gmail.com', 0),
 (3, 2, 3578, 'Samsoel', '3578061207970004', '/image/customer/2.jpg', 'Pakis Gunung IIE / 18, Surabaya', '085730485464', 'samsoel@gmail.com', 0),
-(4, 4, NULL, 'Wadimor Sugiono', '2110151037', NULL, NULL, '123456', NULL, 0);
+(4, 7, NULL, 'wadimor sugiono', '123', NULL, NULL, '456', NULL, 0),
+(5, 9, NULL, 'maarif', '2110151046', NULL, NULL, '0896373646', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -676,6 +693,13 @@ CREATE TABLE `progress` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `progress`
+--
+
+INSERT INTO `progress` (`id`, `project_id`, `photo_path`, `description`, `date`) VALUES
+(1, 2, '', 'Progress pertama', '2017-07-17 02:54:36');
+
 -- --------------------------------------------------------
 
 --
@@ -688,11 +712,22 @@ CREATE TABLE `project` (
   `name` char(255) DEFAULT NULL,
   `type` char(50) DEFAULT NULL,
   `description` text,
+  `city_id` int(11) NOT NULL,
+  `address` text NOT NULL,
   `estimated_budget` bigint(20) DEFAULT NULL,
   `fixed_budget` bigint(20) DEFAULT NULL,
   `start` date DEFAULT NULL,
-  `finish` date DEFAULT NULL
+  `finish` date DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`id`, `customer_id`, `name`, `type`, `description`, `city_id`, `address`, `estimated_budget`, `fixed_budget`, `start`, `finish`, `status`) VALUES
+(1, 2, 'Buat Rumah', 'Build', 'Buatin Rumah ya pak', 1101, 'Jalan Salak', 50000, NULL, NULL, NULL, 1),
+(2, 3, 'Renovasi Apartemen', 'Renovation', 'Tolong Renovasikan apartemen saya', 1106, 'Jl Nangka', 300000000, 450000000, '2017-07-14', '2017-07-28', 1);
 
 -- --------------------------------------------------------
 
@@ -762,7 +797,8 @@ CREATE TABLE `specialization` (
 
 INSERT INTO `specialization` (`id`, `name`) VALUES
 (1, 'Foreman'),
-(2, 'Craftsman');
+(2, 'Craftsman'),
+(3, 'Carpenter');
 
 -- --------------------------------------------------------
 
@@ -790,10 +826,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `access_token`, `email`, `pin`, `login_as`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'samsoec', 'aNLCPkIsrepHPNib_dkqQpMOhOBykC4r', '$2y$13$IbblLgcjli/XCGfQUbHJK.TxAp85F5I4g1C2u0xtnSoeiP3OZps8e', NULL, '6lgM8nu2hMNrN6xYEVfLy0PLK2QZ-3Yn', 'sam.fauzy@gmail.com', NULL, NULL, 10, 1491151275, 1495504553),
-(2, 'samsoel', '3_DY8Pn6o7R_ebi3qENM-ANzTD5ARB_j', '$2y$13$37IJ6QYLFXGFz0O0fHSoQ.IHPLGk9/ayCkDBN506P1DmQeBpKY62G', NULL, 'SQqyswlW1NHzTGXHh_rNOOs59QiGEJTH', 'samsoel@gmail.com', NULL, NULL, 10, 1495366436, 1495464381),
+(1, 'samsoec', 'aNLCPkIsrepHPNib_dkqQpMOhOBykC4r', '$2y$13$IbblLgcjli/XCGfQUbHJK.TxAp85F5I4g1C2u0xtnSoeiP3OZps8e', NULL, 'hn9sKDJXWpUUtCawuZM1lD5PdHDU4fKw', 'sam.fauzy@gmail.com', NULL, NULL, 10, 1491151275, 1496993874),
+(2, 'samsoel', '3_DY8Pn6o7R_ebi3qENM-ANzTD5ARB_j', '$2y$13$37IJ6QYLFXGFz0O0fHSoQ.IHPLGk9/ayCkDBN506P1DmQeBpKY62G', NULL, 'yOz0_QVw2Tc6kLkGrGl-bbiJMNjd8Tdz', 'samsoel@gmail.com', NULL, NULL, 10, 1495366436, 1496992797),
 (3, 'sulasno', 'SFcHX61bNDxI0YlkwkHvw6ldKF8K3x9y', '$2y$13$0CLfkI/m/ggVVtJcA/DmJ.Cu9Hz65lbGwv.78ty5mAePEz5INBnGm', NULL, NULL, 'sulasno@gmail.com', NULL, NULL, 10, 1495370091, 1495370091),
-(4, 'wadimor', 'Q6qVoPr3jinXH0W1F4PfjwM802vsetbJ', '$2y$13$z3XI2/MjVHBuUk9lx.cZi.xC5/LARiaJL1Ddc82rbg/dUr2ttBbOu', NULL, NULL, 'wadimor@gajahduduk.com', NULL, NULL, 10, 1495468698, 1495468698);
+(7, 'wadimor', '6M5fwSrBsNiVELhsL-mTZZQyZEbK0oQu', '$2y$13$6mKtf47GRcfvkfH.VbdMxOKQA.O2R3H1tTxFXi4M9Ppntsg0qKsAa', NULL, '1U0brI6PHRbtqfRy036rVp5P3gQtsx_a', 'wadimor@gmail.com', NULL, NULL, 10, 1495592286, 1495596336),
+(9, 'maarif', 'iKx6OxBmtGxzr5bMu4GQThCSdX3DLdP-', '$2y$13$TAwf7vvLn7M.0MgTB5bUguY.7xatdHhuoEP2ZNXxtqo6NH43JV4HG', NULL, 's9lce3RDcNJS2UsQ7HYB5HmEXU4Brd2t', 'maarif@yahoo.com', NULL, NULL, 10, 1496560825, 1496560826);
 
 -- --------------------------------------------------------
 
@@ -819,15 +856,19 @@ CREATE TABLE `worker` (
   `avg_rating` float DEFAULT NULL,
   `personal_budget` bigint(20) DEFAULT NULL,
   `project_budget` bigint(20) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL
+  `status` tinyint(1) DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `updated_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `worker`
 --
 
-INSERT INTO `worker` (`id`, `project_id`, `user_id`, `city_id`, `specialization_id`, `fullname`, `citizen_id`, `birthdate`, `photo_path`, `address`, `phone_number`, `email`, `graduate`, `graduate_date`, `avg_rating`, `personal_budget`, `project_budget`, `status`) VALUES
-(1, NULL, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 0, 0, 1);
+INSERT INTO `worker` (`id`, `project_id`, `user_id`, `city_id`, `specialization_id`, `fullname`, `citizen_id`, `birthdate`, `photo_path`, `address`, `phone_number`, `email`, `graduate`, `graduate_date`, `avg_rating`, `personal_budget`, `project_budget`, `status`, `created_by`, `created_at`, `updated_at`, `updated_by`) VALUES
+(1, 2, 3, 3578, 1, 'Sulasno', '3578060101550001', '1955-01-01', '/image/worker/1.jpg', 'Pakis Gunung IIE / 18, Surabaya', '081333520091', 'sulasno@gmail.com', NULL, NULL, 0, 100000, 100000, 1, NULL, '2017-07-17 12:33:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -919,7 +960,8 @@ ALTER TABLE `progress`
 --
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `CUSTOMER_PROJECTS_FK` (`customer_id`);
+  ADD KEY `CUSTOMER_PROJECTS_FK` (`customer_id`),
+  ADD KEY `city_id` (`city_id`);
 
 --
 -- Indexes for table `provinces`
@@ -967,12 +1009,12 @@ ALTER TABLE `worker_contacts`
 -- AUTO_INCREMENT for table `budget_log`
 --
 ALTER TABLE `budget_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `cash_flow`
 --
 ALTER TABLE `cash_flow`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `cities`
 --
@@ -992,7 +1034,7 @@ ALTER TABLE `covered_loc`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `log`
 --
@@ -1007,12 +1049,12 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `progress`
 --
 ALTER TABLE `progress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `provinces`
 --
@@ -1022,12 +1064,12 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `specialization`
 --
 ALTER TABLE `specialization`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `worker`
 --
@@ -1105,7 +1147,8 @@ ALTER TABLE `progress`
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
-  ADD CONSTRAINT `FK_CUSTOMER_PROJECTS` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_CUSTOMER_PROJECTS` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `worker`

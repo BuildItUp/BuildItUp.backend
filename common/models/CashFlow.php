@@ -20,8 +20,7 @@ class CashFlow extends BaseCashFlow
             [['customer_id', 'worker_id', 'amount', 'to_budget'], 'integer'],
             [['date'], 'safe'],
             [['description'], 'string'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+           
         ]);
     }
 	
