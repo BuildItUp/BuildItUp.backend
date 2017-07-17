@@ -106,10 +106,11 @@ AppAsset::register($this);
                 <?php } ?>
                 <?php 
                         if(isset(Yii::$app->user->identity)){?>
+                        <?php if($worker !=null){ ?>
                   <li>
                     <?= Html::a('Progress',['project/update?id='.$worker->project_id])?>
                 </li>
-                <?php } ?>
+                <?php }} ?>
                 
                  <?php 
                         if(isset(Yii::$app->user->identity)){?>
